@@ -1,0 +1,121 @@
+\documentclass[a4paper,
+               %boxit,        % check whether paper is inside correct margins
+               %titlepage,    % separate title page
+               %refpage       % separate references
+               biblatex,     % biblatex is used
+               keeplastbox,   % flushend option: not to un-indent last line in References
+               %nospread,     % flushend option: do not fill with whitespace to balance columns
+               %hyphens,      % allow \url to hyphenate at "-" (hyphens)
+               %xetex,        % use XeLaTeX to process the file
+               %luatex,       % use LuaLaTeX to process the file
+               ]{jacow}
+%
+% ONLY FOR \footnote in table/tabular
+%
+\usepackage{pdfpages,multirow,ragged2e} %
+%
+% CHANGE SEQUENCE OF GRAPHICS EXTENSION TO BE EMBEDDED
+% ----------------------------------------------------
+% test for XeTeX where the sequence is by default eps-> pdf, jpg, png, pdf, ...
+%    and the JACoW template provides JACpic2v3.eps and JACpic2v3.jpg which
+%    might generates errors, therefore PNG and JPG first
+%
+\makeatletter%
+	\ifboolexpr{bool{xetex}}
+	 {\renewcommand{\Gin@extensions}{.pdf,%
+	                    .png,.jpg,.bmp,.pict,.tif,.psd,.mac,.sga,.tga,.gif,%
+	                    .eps,.ps,%
+	                    }}{}
+\makeatother
+
+% CHECK FOR XeTeX/LuaTeX BEFORE DEFINING AN INPUT ENCODING
+% --------------------------------------------------------
+%   utf8  is default for XeTeX/LuaTeX
+%   utf8  in LaTeX only realises a small portion of codes
+%
+\ifboolexpr{bool{xetex} or bool{luatex}} % test for XeTeX/LuaTeX
+ {}                                      % input encoding is utf8 by default
+ {\usepackage[utf8]{inputenc}}           % switch to utf8
+
+\usepackage[USenglish]{babel}
+
+%
+% if BibLaTeX is used
+%
+\ifboolexpr{bool{jacowbiblatex}}%
+ {%
+  \addbibresource{references.bib}
+ }{}
+\listfiles
+
+%%
+%%   Lengths for the spaces in the title
+%%   \setlength\titleblockstartskip{..}  %before title, default 3pt
+%%   \setlength\titleblockmiddleskip{..} %between title + author, default 1em
+%%   \setlength\titleblockendskip{..}    %afterauthor, default 1em
+
+\begin{document}
+
+\title{Beam optics modelling through fringe fields during injection and extraction at the CERN Proton Synchrotron}
+
+\author{E. P. Johnson\thanks{eliott.philippe.johnson@cern.ch}, M. A. Fraser, M. G. Atanasov, Y. Dutheil, E. Oponowicz,\\ CERN, 1211 Geneva 23, Switzerland}
+	
+\maketitle
+
+%
+\begin{abstract}
+   My abstract. Test.
+\end{abstract}
+
+
+\section{Introduction}
+
+What is the PS
+
+\subsection{AGS magnets}
+Magnet are AGS.
+\begin{Itemize}
+    \item focusing
+    \item defocusing
+\end{Itemize}
+
+Why are stray fields relevant in the PS ?
+
+\section{OPERA model}
+
+An model of the PS magnet was developed in this reference \cite{anglada_reference_nodate}.
+
+\section{Injection BTP}
+
+\begin{figure}[!htb]
+   \centering
+   \includegraphics*[width=1.0\columnwidth]{kick_response_old_model.png}
+   \caption{Kick response as a function of POPS}
+   \label{fig:kick_response_old_model}
+\end{figure}
+
+\section{Extraction}
+
+\section{Shims}
+
+Look at this shims in Fig. \ref{fig:shim}, it's so beautiful.
+
+\begin{figure*}[!tbh]
+    \centering
+    \includegraphics*[width=\textwidth]{shim}
+
+    \caption{Shim in the ejection 16}
+    \label{fig:shim}
+\end{figure*}
+
+
+\section{CONCLUSION}
+
+In conclusion,...
+
+% REFERENCES
+\printbibliography
+
+
+
+\end{document}
