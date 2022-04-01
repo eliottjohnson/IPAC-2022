@@ -64,28 +64,51 @@
 
 %
 \begin{abstract}
-   My abstract. Test.
+   Injection and extracted beam in the CERN Proton Synchrotron (PS) travels through it's combined function magnets. Although the region around the central orbit is well controlled, fringe field felt during main unit traversal must be modelled in order to improve the beam injection and extraction.
 \end{abstract}
 
 
 \section{Introduction}
 
-What is the PS
+The CERN PS is composed of a 100 combined function main unit magnets.
 
 \subsection{AGS magnets}
-Magnet are AGS.
-\begin{Itemize}
-    \item focusing
-    \item defocusing
-\end{Itemize}
+The PS is a Alternating Gradient Synchrotron (AGS) that uses a strong focusing mechanism. It uses combined function magnet that have an half focusing and half defocussing part of opposite gradient of induction $\frac{dB}{dr}$.
 
-Why are stray fields relevant in the PS ?
+\begin{figure}[!htb]
+   \centering
+   \includegraphics*[width=1.0\columnwidth]{magnet.png}
+   \caption{Focusing and defocusing yokes}
+   \label{fig:magnet}
+\end{figure}
+
+The main units of the PS are combined function magnet. The yoke provides both a dipolar and a quadrupolar field. Each magnet units consists in a combination of five focusing yokes followed by five defocusing yokes following the FDODFOFDODF pattern \cite{}
+
+\begin{figure}[!htb]
+   \centering
+   \includegraphics*[width=1.0\columnwidth]{magnet_type.png}
+   \caption{U, R, S, T}
+   \label{fig:magnet_type}
+\end{figure}
+
+There are four types of magnets, U, R, S, T that have a different combination of focusing and defocusing half-magnet and the coil on the inside or outside of the ring.
+
+Although the combined function magnet is a clever design when the beam is in orbit, extracting the beam through the main units causes stray fields effects.
 
 \section{OPERA model}
 
-An model of the PS magnet was developed in this reference \cite{anglada_reference_nodate}.
+In this reference a model of the PS magnet was developed \cite{anglada_reference_nodate}.
+
+\begin{figure}[!htb]
+   \centering
+   \includegraphics*[width=1.0\columnwidth]{main_field.png}
+   \caption{Dipole and Quadrupole field}
+   \label{fig:main_field}
+\end{figure}
 
 \section{Injection BTP}
+
+As the beam is injected via the BTP transfer line to the PS ring, it passes through the stray fields of the PR.BHT41 T-type main unit magnet. Once through, the beam is kicked by septum magnet PI.SMH42 to capture the reference orbit. Beam position can then be measured using a Secondary Emission Grid (SEM Grid) PI.BSG42.
 
 \begin{figure}[!htb]
    \centering
@@ -96,14 +119,32 @@ An model of the PS magnet was developed in this reference \cite{anglada_referenc
 
 \section{Extraction}
 
-\section{Shims}
+Extraction to East passes through two main units MU62 and MU63. As a result of the stray fields, instead of following a DFOFDODFOF lattice, the beam follows a DFOFDODD?D lattice. This succession in defocusing gradient increases the horizontal beam size.
 
-Look at this shims in Fig. \ref{fig:shim}, it's so beautiful.
+\begin{figure*}[!htb]
+   \centering
+   \includegraphics*[width=\textwidth]{track_mu62.png}
+   \caption{track mu62}
+   \label{fig:track mu62}
+\end{figure*}
+
+\begin{figure}[!htb]
+   \centering
+   \includegraphics*[width=1.0\columnwidth]{gradient_track_mu62.png}
+   \caption{gradient track mu62}
+   \label{fig:gradient track mu62}
+\end{figure}
+
+
+\section{Magnetic shims}
+
+Magnetic shims are installed at ejection 16 and 63 to homogenize the field by shielding the ejected beam from a non linear fringe field. In 16, the shims have different radial position for each of the five different shims.
+
+Look at this shims in Fig. \ref{fig:shim}.
 
 \begin{figure*}[!tbh]
     \centering
     \includegraphics*[width=\textwidth]{shim}
-
     \caption{Shim in the ejection 16}
     \label{fig:shim}
 \end{figure*}
