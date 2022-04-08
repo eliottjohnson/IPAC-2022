@@ -64,51 +64,63 @@
 
 %
 \begin{abstract}
-   Injection and extracted beam in the CERN Proton Synchrotron (PS) travels through it's combined function magnets. Although the region around the central orbit is well controlled, fringe field felt during main unit traversal must be modelled in order to improve the beam injection and extraction.
+As the beam is injected and extracted from the CERN Proton Synchrotron (PS), it passes through the fringing magnetic fields of the main bending units (MUs). In this study, tracking simulations using field maps created from a 3D magnetic model of the MUs are compared to beam-based measurements made through the fast injection and slow extraction regions. The behavior of the fringe field is characterized, and its implementation in the MAD-X model of the machine is described.
 \end{abstract}
 
 
 \section{Introduction}
 
-The CERN PS is composed of a 100 combined function main unit magnets.
+The CERN PS is composed of 100 combined function main unit magnets.
 
 \subsection{AGS magnets}
-The PS is a Alternating Gradient Synchrotron (AGS) that uses a strong focusing mechanism. It uses combined function magnet that have an half focusing and half defocussing part of opposite gradient of induction $\frac{dB}{dr}$.
+The PS is a Alternating Gradient Synchrotron (AGS) that uses a strong focusing mechanism. It uses combined function magnet that have an half focusing Fig.\ref{fig:focusing} and half defocussing Fig.\ref{fig:defocusing} part of opposite gradient of induction $\frac{dB}{dr}$.
 
 \begin{figure}[!htb]
-   \centering
-   \includegraphics*[width=1.0\columnwidth]{magnet.png}
-   \caption{Focusing and defocusing yokes}
-   \label{fig:magnet}
+  \centering
+  \begin{minipage}[b]{0.45\columnwidth}
+    \includegraphics*[width=\textwidth]{focusing}
+    \caption{Closed Focusing yoke}
+    \label{fig:focusing}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\columnwidth}
+    \includegraphics*[width=\textwidth]{focusing}
+    \caption{Open Defocusing yoke}
+    \label{fig:defocusing}
+  \end{minipage}
 \end{figure}
 
 The main units of the PS are combined function magnet. The yoke provides both a dipolar and a quadrupolar field. Each magnet units consists in a combination of five focusing yokes followed by five defocusing yokes following the FDODFOFDODF pattern \cite{}
 
-\begin{figure}[!htb]
-   \centering
-   \includegraphics*[width=1.0\columnwidth]{magnet_type.png}
-   \caption{U, R, S, T}
-   \label{fig:magnet_type}
-\end{figure}
-
 There are four types of magnets, U, R, S, T that have a different combination of focusing and defocusing half-magnet and the coil on the inside or outside of the ring.
 
-Although the combined function magnet is a clever design when the beam is in orbit, extracting the beam through the main units causes stray fields effects.
+Although the combined function magnet is a clever design when the beam is in orbit, extracting the beam through the main units causes stray-field effects.
 
 \section{OPERA model}
-
-In this reference a model of the PS magnet was developed \cite{anglada_reference_nodate}.
+A model of the PS magnet was developed \cite{anglada_reference_nodate}. It allows producing field maps Fig.\ref{fig:dipole_field} and Fig.\ref{fig:gradient_field}. Limitation are that it is straight.
+The OPERA model gives similar results to the measurement done in 1977 \cite{manglunki_beam_1997} but with increased flexibility as one can produce field maps at different energies and the field map can have a greater distribution in space as there is no limitation by the size of the measuring equipment.
 
 \begin{figure}[!htb]
    \centering
-   \includegraphics*[width=1.0\columnwidth]{main_field.png}
-   \caption{Dipole and Quadrupole field}
-   \label{fig:main_field}
+   %trim={<left> <lower> <right> <upper>}
+   \includegraphics*[width=1.0\columnwidth, trim={0 2.9cm 0 4cm},clip]{dipole_field.png}
+   \caption{Dipole field map of a U-type magnet centered in the vertical plane at 24 GeV}
+   \label{fig:dipole_field}
 \end{figure}
+
+\begin{figure}[!htb]
+   \centering
+   %trim={<left> <lower> <right> <upper>}
+   \includegraphics*[width=1.0\columnwidth, trim={0 2.0cm 0 4cm},clip]{gradient_field.png}
+   \caption{Gradient field of a U-type magnet centered in the vertical plane at 24 GeV}
+   \label{fig:gradient_field}
+\end{figure}
+
+Tracking a particles through these field maps is done through a script by Ewa and Yann. It also allows to produce transfer matrices that can be implemented in tracking simulation such as MAD-X.
 
 \section{Injection BTP}
 
-As the beam is injected via the BTP transfer line to the PS ring, it passes through the stray fields of the PR.BHT41 T-type main unit magnet. Once through, the beam is kicked by septum magnet PI.SMH42 to capture the reference orbit. Beam position can then be measured using a Secondary Emission Grid (SEM Grid) PI.BSG42.
+As the beam is injected via the BTP transfer line to the PS ring, it passes through the stray fields of the PR.BHT41 T-type main unit magnet. Once through, the beam is kicked by the PI.SMH42 septum magnet to capture the reference orbit. Beam position can then be measured using a Secondary Emission Grid (SEM Grid) PI.BSG42.
 
 \begin{figure}[!htb]
    \centering
@@ -119,7 +131,7 @@ As the beam is injected via the BTP transfer line to the PS ring, it passes thro
 
 \section{Extraction}
 
-Extraction to East passes through two main units MU62 and MU63. As a result of the stray fields, instead of following a DFOFDODFOF lattice, the beam follows a DFOFDODD?D lattice. This succession in defocusing gradient increases the horizontal beam size.
+The extraction to the east area passes through two main units, MU62 and MU63. As a result of the stray fields, instead of following a DFOFDODFOF lattice, the beam follows a DFOFDODD?D lattice. This succession in defocusing gradient increases the horizontal beam size. This can be seen in the trajectory that the beam takes as the beam is extracted from the PS to the East Area Fig. \ref{fig:gradient track mu62}. The beam is defocused in the half-defocusing part of the magnet but once it enters the second half-focusing part it is transversely out of the flat zone of the gradient and into the non-linear part that is has an order of magnitude larger defocusing effect. This leads to a severe increase in horizontal beam size and thus a very flat beam at the exit of the MU62. This is probably why the Q74 magnet was installed and is allowed to pulse so high.
 
 \begin{figure*}[!htb]
    \centering
