@@ -126,12 +126,10 @@ $$ x_{j} = \frac{x_{i+1} + x_{i}}{{2}} $$
  
 The gradient is constant and alternating in the central orbit region but reverses signs at the periphery and increases in magnitude in a nonlinear way; see Fig.\ref{fig:gradient_field}. Similar results have been previously made using magnetic measurements of the MU fields \cite{manglunki_beam_1997}. Earlier models of the stray field for extraction 16 at 26 GeV/c proved to be adequate in the description of operational beams. However, the OPERA model adds the possibility to quickly generate field maps at different energies, different PFW, different F8L settings and for different magnet types. Field maps produced with the OPERA model also have virtually infinite lengths, whereas physical measurements are limited by the geometry of the magnet and the measuring instrument (-0.07 m $\leq$ x $\leq$ 0.31 and -2.55 m $\leq$ z $\leq$ 2.73), \cite{manglunki_beam_1997}.
 
-
-
 \begin{figure}[!htb]
    \centering
    \includegraphics*[width=1.0\columnwidth, trim={0 0 0 0cm},clip]{Main_field_B_G.png}
-   \caption{Gradient field of a U-type magnet centered in the vertical plane in both half-units at 24 GeV}
+   \caption{PS main unit U-type | Main field B, G | y=0, Gradient field of a U-type magnet centered in the vertical plane in both half-units at 24 GeV}
    \label{fig:gradient_field}
 \end{figure}
 
@@ -139,7 +137,7 @@ The gradient is constant and alternating in the central orbit region but reverse
 Particle tracking through field maps is done using the Boris algorithm that tracks charged particles in EM-fields using the discretized equation of motion of the Lorentz force\cite{qin_why_2013}\cite{ripperda_comprehensive_2018}. Additionally, numerical tracking of a number of representative particles allows one to produce transfer matrices that can be implemented in tracking simulation such as MAD-X \cite{yoon_method_2013}.
 
 \section{Beam Tracking}
-Fields maps at three different energies for each magnet type have been produced: injection at 2 GeV/c with 533 A, slow extraction to the east area at 24 GeV/c at 4642 A, and extraction to the SPS at 26.4 GeV/c at 5386 A. In the following, the injection from the BTP transfer line to the PS and the extraction from the PS to the East Area have been studied.
+Fields maps have been produced for each magnet type at three different energies: injection at 2 GeV/c with 533 A, slow extraction to the east area at 24 GeV/c with 4642 A, and extraction to the SPS at 26.4 GeV/c with 5386 A. In the following, the injection from the BTP transfer line to the PS and the extraction from the PS to the East Area have been studied.
 
 \subsection{Injection BTP}
 As the beam is injected via the BTP transfer line to the PS ring, it passes through the stray fields of the PR.BHT41 T-type MU magnet. The beam traverses mostly through the defocusing half part and feels a non-linear increase in the gradient up to the nominal value in the central orbit. Once through the MU 41, the beam is kicked by the PI.SMH42 septum magnet to capture the reference orbit. Beam position can then be measured using the downstream Secondary Emission Grid (SEM Grid) PI.BSG42. Single particle tracking is done by centering the initial beam in the middle of the injection pipe using the GEODE reference points see Fig. \ref{fig:injection_btp}.
@@ -147,7 +145,7 @@ As the beam is injected via the BTP transfer line to the PS ring, it passes thro
 \begin{figure}[!htb]
    \centering
    \includegraphics*[width=1.0\columnwidth]{injection_btp.png}
-   \caption{Tracking through MU 41 T-type. It can be noticed that the field map is straight as opposed to the curved technical drawing.}
+   \caption{Tracking through MU 41 T-type, momentum 2 GeV/c, extraction offset 54.684 mm, angle 5.093 degrees. It can be noticed that the field map is straight as opposed to the curved technical drawing.}
    \label{fig:injection_btp}
 \end{figure}
 
@@ -156,7 +154,7 @@ Measurements have been done by scaling the current in all main units using the P
 \begin{figure}[!htb]
    \centering
    \includegraphics*[width=1.0\columnwidth]{transverse_position_vs_POPS}
-   \caption{Comparison between the transverse position as function of B field in MU41}
+   \caption{BT3 BTP PS, Kick response as a function of POPS measurement compared with the multipole field coefficient model and the OPERA tracking model}
    \label{fig:injection_btp_transverse_position}
 \end{figure}
 
