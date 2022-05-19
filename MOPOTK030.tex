@@ -78,13 +78,13 @@ The CERN PS uses the strong focusing mechanism for beam convergence. The PS is c
 \begin{figure}[!htb]
   \centering
   \begin{minipage}[b]{0.45\columnwidth}
-    \includegraphics*[width=\textwidth]{focusing}
+    \includegraphics*[width=\textwidth]{MOPOTK030_f1.png}
     \caption{Closed Focusing yoke.}
     \label{fig:focusing}
   \end{minipage}
   \hfill
   \begin{minipage}[b]{0.45\columnwidth}
-    \includegraphics*[width=\textwidth]{defocusing}
+    \includegraphics*[width=\textwidth]{MOPOTK030_f2.png}
     \caption{Open Defocusing yoke.}
     \label{fig:defocusing}
   \end{minipage}
@@ -92,28 +92,15 @@ The CERN PS uses the strong focusing mechanism for beam convergence. The PS is c
 
 There are four types of magnets: R, S, T, and U, depending on the arrangement of the half-units (FD or DF) and whether the main coil is on the inside or outside of the ring \cite{steerenberg_fifty_2011}. Additional coils called pole face winding (PFW) and figure-of-eight loop (F8L) are wrapped around the yokes to correct for chromaticity and tune. Although the combined function magnet works well when the beam is in the central orbit, every injection/extraction of the beam travels through the MUs, which causes large stray-field effects. The PS wasn't built with straight sections long enough for injection/extraction at high energy and the deflection angles of the septas are small which forces the ejected beam to travel close to the central orbit and through the stray fields of the MUs \cite{risselada_beam_nodate}.
 
-
 \subsection{The OPERA model}
 A model of the PS main units was developed using Cobham's Opera-3D that allows the production of field maps for all four types of magnet and for different currents in main coil as well as in the PFW and F8L. The model includes the main junction gap of 20 mm (a significant source of fringe fields) between the two half units as well as the mini junctions between open block of 9.75 mm and 7.75 mm between closed blocks. A plane containing the geometry of both open and closed yokes is swept in the longitudinal direction. This allows to keep a high accuracy of the model and reduces the computation time. A limitation of the single plane is that it is a straight model, whereas the real magnets are curved. The density of the mesh is adjusted so that it has a high resolution in close proximity to the central orbit and at the junctions to capture the fringe fields \cite{anglada_reference_2019}.
-
-
-
-%\begin{figure}[!htb]
-%   \centering
-%   %trim={<left> <lower> <right> <upper>}
-%   \includegraphics*[width=1.0\columnwidth, trim={0 2.7cm 0 4.1cm},clip]{gradient_field.png}
-%   \caption{Gradient field of a U-type magnet centered in the vertical plane at 24 GeV}
-%   \label{fig:gradient_field}
-%\end{figure}
-
-
 
 An example of a field map (vector field of Bx,By,Bz in x,y,z space) produced by the Opera model is presented in Fig.\ref{fig:dipole_field}. The transverse displacement of the peak of the vertical dipole field $B_{y}$ along the z-axis corresponds to the switch from one half units to the next one. The resolution of the field map is high enough to see the mini-junction between the five blocks.
 
 \begin{figure}[!htb]
    \centering
    %trim={<left> <lower> <right> <upper>}
-   \includegraphics*[width=1.0\columnwidth, trim={0 2.9cm 0 4.3cm},clip]{dipole_field.png}
+   \includegraphics*[width=1.0\columnwidth, trim={0 2.9cm 0 4.3cm},clip]{MOPOTK030_f3.png}
    \caption{Dipole field map of a U-type magnet centered in the vertical plane at 24 GeV.}
    \label{fig:dipole_field}
 \end{figure}
@@ -124,11 +111,11 @@ $$ \boldsymbol{G}(x_{j},z) = \frac{\Delta\boldsymbol{B}}{\Delta x} = \frac{\bold
 where,
 $$ x_{j} = \frac{x_{i+1} + x_{i}}{{2}} $$
  
-The gradient is constant and alternating in the central orbit region, but reverses signs at the periphery and increases in magnitude in a nonlinear way; see Fig.\ref{fig:gradient_field}. Similar results have previously been made using magnetic measurements of the MU fields \cite{manglunki_beam_1997}. Earlier models of the stray field for extraction 16 at 26 GeV/c proved to be adequate in the description of operational beams. However, the OPERA model adds the possibility to quickly generate field maps at different energies, different PFW, different F8L settings and for different magnet types. Field maps produced with the OPERA model also have virtually infinite lengths, whereas physical measurements are limited by the geometry of the magnet and the measuring instrument (-0.07 $\leq$ x $\leq$ 0.31 m and -2.55 $\leq$ z $\leq$ 2.73 m), \cite{manglunki_beam_1997}.
+The gradient is constant and alternating in the central orbit region, but reverses signs at the periphery and increases in magnitude in a nonlinear way; see Fig.\ref{fig:gradient_field}. Similar results have previously been made using magnetic measurements of MU fields \cite{manglunki_beam_1997}. Earlier models of the stray field for extraction 16 at 26 GeV/c proved to be adequate in the description of operational beams. However, the OPERA model adds the possibility to quickly generate field maps at different energies, different PFW, different F8L settings and for different magnet types. Field maps produced with the OPERA model also have virtually infinite lengths, whereas physical measurements are limited by the geometry of the magnet and the measuring instrument (-0.07 $\leq$ x $\leq$ 0.31 m and -2.55 $\leq$ z $\leq$ 2.73 m), \cite{manglunki_beam_1997}.
 
 \begin{figure}[!htb]
    \centering
-   \includegraphics*[width=1.0\columnwidth, trim={0 0 0 0cm},clip]{Main_field_B_G.png}
+   \includegraphics*[width=1.0\columnwidth, trim={0 0 0 0cm},clip]{MOPOTK030_f4.png}
    \caption{Dipole and gradient component of a  PS U-type MU centered in the vertical plane in both half-units at 24 GeV. Outside of the central orbit the gradient is non-linear and at it's peak as an amplitude almost three times higher.}
    \label{fig:gradient_field}
 \end{figure}
@@ -144,7 +131,7 @@ As the beam is injected via the BTP transfer line to the PS ring, it passes thro
 
 \begin{figure}[!htb]
    \centering
-   \includegraphics*[width=1.0\columnwidth]{injection_btp.png}
+   \includegraphics*[width=1.0\columnwidth]{MOPOTK030_f5.png}
    \caption{Tracking through MU 41 T-type, momentum 2 GeV/c, extraction offset 54.684 mm, angle 5.093 degrees. It can be noticed that the field map is straight as opposed to the curved technical drawing.}
    \label{fig:injection_btp}
 \end{figure}
@@ -153,12 +140,12 @@ Measurements have been done by scaling the current in all main units using the P
 
 \begin{figure}[!htb]
    \centering
-   \includegraphics*[width=1.0\columnwidth]{transverse_position_vs_POPS}
+   \includegraphics*[width=1.0\columnwidth]{MOPOTK030_f6.png}
    \caption{Measurements of the BT3 BTP PS kick response as a function of POPS compared with the OPERA tracking model and the multipole field coefficient model.}
    \label{fig:injection_btp_transverse_position}
 \end{figure}
 
-In addition, the current model of the stray field composed of 235 multipoles with multipoles K0, K1, K2, and K3 components is compared with the components found with tracking. The dipole component is saved along the track, and the quadrupole component is computed using two adjacent tracks with a slight transverse offset at the intial starting point. The OPERA tracking model gives components close to the previous model. The dipole integral of the OPERA model is $8.36\cdot10^{-3}$ Tm, and the multipole field coefficient (MFC) model gives $8.86\cdot10^{-3}$ Tm, which is a difference of 5.63\% compared to the MFC model. The integral of the quadrupole component of the OPERA model is $-6.68\cdot10^{-2}$ T and the MFC is $-7.43\cdot10^{-2}$ T, a 10.03\% difference compared to the MFC model.
+Furthermore, the current model of the stray field composed of 235 multipoles with multipole components K0, K1, K2 and K3 is compared with the components found with tracking. The dipole component is saved along the track, and the quadrupole component is computed using two adjacent tracks with a slight transverse offset at the intial starting point. The OPERA tracking model gives components close to the previous model. The dipole integral of the OPERA model is $8.36\cdot10^{-3}$ Tm, and the multipole field coefficient (MFC) model gives $8.86\cdot10^{-3}$ Tm, which is a difference of 5.63\% compared to the MFC model. The integral of the quadrupole component of the OPERA model is $-6.68\cdot10^{-2}$ T and the MFC is $-7.43\cdot10^{-2}$ T, a 10.03\% difference compared to the MFC model.
 
 
 \subsection{Extraction to the East Area}
@@ -166,7 +153,7 @@ The extraction to the East Area is affected by the stray fields of two main unit
 
 \begin{figure}[!htb]
    \centering
-   \includegraphics*[width=1.0\columnwidth]{particle_distribution.png}
+   \includegraphics*[width=1.0\columnwidth]{MOPOTK030_f7.png}
    \caption{Particle distribution entering the main unit 62 (red) and exiting the main unit (blue) following the extraction trajectory (no momentum spread in the distribution).}
    \label{fig:particle_distribution}
 \end{figure}
