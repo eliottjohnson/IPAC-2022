@@ -45,6 +45,7 @@
 \ifboolexpr{bool{jacowbiblatex}}%
  {%
   \addbibresource{references.bib}
+  \addbibresource{references_extra.bib}
  }{}
 \listfiles
 
@@ -64,38 +65,30 @@
 
 %
 \begin{abstract}
-As the beam is injected and extracted from the CERN Proton Synchrotron (PS), it passes through the fringing magnetic fields of the Main bending Units (MUs). In this study, tracking simulations using field maps created from a 3D magnetic model of the MUs are compared to beam-based measurements made through the fast injection and slow extraction regions. The behavior of the fringe field is characterized, and its implementation in the MAD-X model of the machine is described.
+As the beam is injected and extracted from the CERN Proton Synchrotron (PS) it passes through the fringing magnetic fields of the Main bending Units (MUs). In this study, tracking simulations using field maps created from a 3D magnetic model of the MUs are compared to beam-based measurements made through the fast injection and slow extraction regions. The behavior of the fringe field is characterized, and its implementation in the MAD-X \cite{noauthor_mad_nodate} model of the machine is described.
 \end{abstract}
 
 
 \section{Introduction}
-When protons and ion beams are injected and extracted into the PS ring, they travel through the nonlinear stray fields produced by the PS MUs. In these regions, an accurate optical model is imperative for the preservation of transverse emittance. Scaling of the model with energy is required as the injection occurs at 2 GeV/c, and the extractions to the East Area and to the Super Proton Sychrotron (SPS) are at 24 GeV/c and 26 GeV/c, respectively. The limitations of the earlier measurements-based models are that they were produced at a single energy. Versatility is also considered as the beam travels through stray fields with different angles, different magnet types, and a nonconstant number of MUs. A new technique for modeling the stray field that relies solely on simulations is presented, considering the proton injection at 2 GeV/c and the extraction at 24 GeV/c to the East Area. This new model will benefit Charm High-energy Ions for Micro Electronics Reliability Assurance (CHIMERA), which aims to use very high-energy heavy-ion beams to study the effect of single event effects on electric, electronic, and electromechanical devices, both for research and industry users.
+When protons and ion beams are injected and extracted into the PS ring, they travel through the non-linear stray fields produced by the PS MUs. In these regions, an accurate optical model is imperative to ensure high transmission and preservation of transverse emittance. Scaling of the model with energy is required as the injection occurs at 2 GeV, and the extractions to the East Area and to the Super Proton Sychrotron (SPS) are at 24 GeV and 26 GeV, respectively. The stray field depends on the level of saturation in the MU and must be included in the model to accurately parameterise the effect on the beam over the wide range of beam energies provided by the PS. The model will be exploited for the Charm High-energy Ions for Micro Electronics Reliability Assurance (CHIMERA) project, which aims to deliver heavy-ion beams over a wide range of energies to study the effect of single event effects on electric, electronic, and electromechanical devices, both for research and industry users \cite{fraser:ipac22-wepost012}.
 
 \section{Field maps}
 \subsection{PS Main Units}
-The CERN PS uses the strong focusing mechanism for beam convergence. It is composed of 100 combined function main unit magnets that produce dipolar and quadrupolar fields simultaneously. Each magnet is divided into two half-units with gradients of opposite polarity. Half-units are composed of five blocks of either closed blocks that are focusing (F), see Fig.\ref{fig:focusing} or open blocks that are defocusing (D), see Fig.\ref{fig:defocusing}.
+The CERN PS is composed of 100 combined-function MU magnets that produce dipolar and quadrupolar fields simultaneously to provide strong focusing. Each magnet is divided into two half-units with quadrupole gradients of opposite polarity. Half-units are composed of five blocks of either closed blocks that are focusing (F) or open blocks that are defocusing (D), see Fig.\ref{fig:streamplot}.
 
 \begin{figure}[!htb]
-  \centering
-  \begin{minipage}[b]{0.45\columnwidth}
-    \includegraphics*[width=\textwidth]{MOPOTK030_f1.png}
-    \caption{Closed Focusing yoke.}
-    \label{fig:focusing}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.45\columnwidth}
-    \includegraphics*[width=\textwidth]{MOPOTK030_f2.png}
-    \caption{Open Defocusing yoke.}
-    \label{fig:defocusing}
-  \end{minipage}
+   \centering
+   \includegraphics*[width=1.0\columnwidth]{streamplot_defocusing_focusing.png}
+   \caption{Vector flow of an open defocusing yoke (left) and a closed focusing yoke (right)}
+   \label{fig:streamplot}
 \end{figure}
 
-There are four types of magnets: R, S, T and U, depending on the arrangement of the half-units (FD or DF) and whether the main coil is on the inside or outside of the ring \cite{steerenberg_fifty_2011}. Additional coils called pole face winding (PFW) and figure-of-eight loop (F8L) are wrapped around the yokes to correct for chromaticity and tune. Although the combined function magnet works well when the beam is in the central orbit, every injection and extraction of the beam travels through at least one MU, which causes noticeable stray field effects. This is a consequence of the PS not being built with straight sections long enough for injection/extraction at high energy and small septum deflection angles, forcing the extracted beam to travel close to the central orbit and through the stray fields of the MUs \cite{risselada_beam_nodate}.
+There are four types of magnets: R, S, T and U, depending on the arrangement of the half-units (FD or DF) and whether the main coil is on the inside or outside of the ring \cite{steerenberg_fifty_2011}. Additional coils named the Pole Face Windings (PFW) and Figure-of-eight Loop (F8L) are inserted between the yoke and the vacuum chamber to control the tune and chromaticity. Although the good field region of the combined function magnet extends over a large part of the magnet aperture around the circulating beam orbit, see Fig.~\ref{fig:gradient_field}, the injection and extraction trajectory of the beam travels through strong regions of fringing or stray field. This is a consequence of the PS not being built with straight sections long enough for injection/extraction at high energy, forcing the extracted beam to travel through the stray fields of the MUs \cite{risselada_beam_nodate}.
 
 \subsection{The OPERA model}
-A model of the PS main units was developed using Cobham's Opera-3D that allows the production of field maps for all four types of magnets and for different currents in the main coils as well as in the PFW and F8L. The model includes the main junction gap of 20 mm (a significant source of fringe field) between the two half units as well as the mini junctions between open blocks of 9.75 mm and 7.75 mm between closed blocks. A plane containing the geometry of open and closed yokes is swept in the longitudinal direction, allowing us to maintain high accuracy of the model, and reduces the computation time.This feature of a single plane also has limitations as it models straight magnets, while real magnets have a curvature. The density of the mesh is adjusted so that it has a high resolution in close proximity to the central orbit and at the junctions to capture the fringe fields \cite{anglada_reference_2019}.
+A finite element magnetic model of the PS MU was developed using Cobham's \texttt{Opera-3D}~\cite{noauthor_opera_nodate, anglada_pxmu_hrcwp_nodate} to generate field maps for all four types of magnets and for different excitation currents in the main coils, as well as in the PFW and F8L. The model includes the main junction gap of 20 mm (a significant source of fringe field) between the two half units as well as the mini junctions between open blocks of 9.75 mm and 7.75 mm between closed blocks. A plane containing the geometry of open and closed yokes is swept in the longitudinal direction, allowing us to maintain high accuracy of the model, and reduces the computation time. This feature of a single plane also has limitations as it models straight magnets, while real magnets have a curvature. The density of the mesh is adjusted so that it has a high resolution in close proximity to the central orbit and at the junctions to capture the fringe fields \cite{anglada_reference_2019}.
 
-An example of a field map (vector field of Bx, By, Bz in x, y, z space) produced by the Opera model is presented in Fig.\ref{fig:dipole_field}. The transverse displacement of the peak of the vertical dipole field $B_{y}$ along the z-axis corresponds to the switch from one half-unit to the next. The resolution of the field map is high enough to see the mini-junction between the five blocks.
+An example of vector field map ($B_x$, $B_y$, $B_z$) in a Cartesian coordinate system ($x$,$y$,$z$) produced by the \texttt{Opera-3D} model is presented in Fig.~\ref{fig:dipole_field}. The transverse displacement of the peak of the vertical dipole field $B_{y}$ along the z-axis corresponds to the switch from one half-unit to the next. The resolution of the field map is high enough to see the mini-junction between the five blocks. The \texttt{Opera-3D} model can be exploited to generate field maps at different energies, different PFW, different F8L settings, and for the different magnet types. 
 
 \begin{figure}[!htb]
    \centering
@@ -111,59 +104,74 @@ $$ \boldsymbol{G}(x_{j},z) = \frac{\Delta\boldsymbol{B}}{\Delta x} = \frac{\bold
 where,
 $$ x_{j} = \frac{x_{i+1} + x_{i}}{{2}} $$
  
-The gradient is constant and alternating in the central orbit region, but reverses signs at the periphery and increases in magnitude in a nonlinear way; see Fig.\ref{fig:gradient_field}. Similar results have previously been made using magnetic measurements of MU fields \cite{manglunki_beam_1997}. Earlier models of the stray field for extraction 16 at 26 GeV/c proved to be adequate in the description of operational beams. However, the OPERA model adds the possibility to quickly generate field maps at different energies, different PFW, different F8L settings, and for different magnet types. Field maps produced with the OPERA model also have virtually infinite lengths, while those produced with field measurements were limited by magnet geometry and measuring equipment (-0.07 $\leq$ x $\leq$ 0.31 m and -2.55 $\leq$ z $\leq$ 2.73 m)\cite{manglunki_beam_1997}.
+ As shown in Fig.~\ref{fig:gradient_field}, the gradient is constant and alternating in the central orbit region, but reverses signs at the periphery and increases in magnitude in a non-linear way.  In this region centered around 0 m and of total width of \char`\~0.144 m, the gradient is constant within 5\% of the center gradient.
+
 
 \begin{figure}[!htb]
    \centering
-   \includegraphics*[width=1.0\columnwidth, trim={0 0 0 0cm},clip]{MOPOTK030_f4.png}
-   \caption{Dipole and gradient component of a  PS U-type MU centered in the vertical plane in both half-units at 24 GeV. The gradient outside the central orbit is nonlinear and, at its maximum, is almost three-fold higher in amplitude.}
+   \includegraphics*[width=1.0\columnwidth, trim={0 0 0 0cm},clip]{Main_field_B_G_with_mask.png}
+   \caption{Dipole and gradient component of a  PS U-type MU centered in the vertical plane in both half-units at 24 GeV. The gradient outside the green-shaded central orbit is non-linear and, at its maximum, is almost three-fold higher in amplitude.}
    \label{fig:gradient_field}
 \end{figure}
 
-\subsection{Tracking}
-Particle tracking through field maps is done using the Boris algorithm that tracks charged particles in EM-fields using the discretized equation of motion of the Lorentz force\cite{qin_why_2013}\cite{ripperda_comprehensive_2018}. Additionally, the numerical tracking of a number of representative particles allows one to produce transfer matrices that can be implemented in tracking simulations such as MAD-X \cite{yoon_method_2013}.
+\subsection{Beam Tracking}
 
-\section{Beam Tracking}
-Field maps have been produced for each magnet type at three different energies: injection at 2 GeV/c with 533 A, slow extraction to the east area at 24 GeV/c with 4642 A, and extraction to the SPS at 26.4 GeV/c with 5386 A. In the following, the injection from the BTP transfer line to the PS and the extraction from the PS to the East Area have been studied.
+Particle tracking through field maps is done using the Boris algorithm that tracks charged particles in EM-fields using the discretized equation of motion of the Lorentz force \cite{dutheil_pybttrackersborispy_nodate,qin_why_2013,ripperda_comprehensive_2018}. Field maps were produced for each magnet type at three different energies: injection at 2 GeV with 533 A, slow extraction to the east area at 24 GeV with 4642 A, and extraction to the SPS at 26.4 GeV with 5386 A. In the following, measurements and tracking studies of injection from the BTP transfer line to the PS and extraction from the PS to the East Area are discussed
 
-\subsection{Injection BTP}
-As the beam is injected via the BTP transfer line to the PS ring, it passes through the stray fields of the PR.BHT41 T-type MU magnet. The beam traverses mostly through the defocusing half part and feels a nonlinear increase in the gradient up to the nominal value in the central orbit. Once through MU41, the beam is kicked by the PI.SMH42 septum magnet to capture the reference orbit. The beam position can then be measured using the downstream Secondary Emission Grid (SEM Grid) PI.BSG42. Single particle tracking is done by centering the initial beam in the middle of the injection pipe at the GEODE reference points, see Fig. \ref{fig:injection_btp}.
+\section{Injection via BTP}
+As the beam is injected via the BTP transfer line to the PS ring, it passes through the stray fields of the PR.BHT41 T-type MU magnet. The beam traverses mostly through the defocusing half part and feels a non-linear increase in the gradient up to the nominal value in the central orbit. Once through MU41, the beam is deflected by the injection septum magnet (PI.SMH42) towards the central orbit, see Fig.~\ref{fig:injection_btp}. Immediately downstream of the septum a Secondary Emission Grid (PI.BSG42) is available to measure the beam position and size.
 
 \begin{figure}[!htb]
    \centering
    \includegraphics*[width=1.0\columnwidth]{MOPOTK030_f5.png}
-   \caption{Tracking through MU41 T-type, momentum 2 GeV/c, extraction offset 54.684 mm, angle 5.093 degrees. It can be noticed that the field map is straight as opposed to the curved technical drawing.}
+   \caption{Tracking through MU41 T-type at 2 GeV.}
    \label{fig:injection_btp}
 \end{figure}
-Measurements were collected by means of scaling the current in all MUs using theW Power system for PS main magnets (POPS); for our purpose, we only consider MU41, as it is the only magnet through which the beam passes. As expected, an increasing B field shows a decrease in the transverse position of the beam as it is bent closer to the inside of the ring on the SEM-grid. The 2 GeV/c T-type field map is scaled by the same factor as the current, and a single particle is tracked through the field map. The position and angle at the end of the exit of the main unit are saved and inserted in the MAD-X PS lattice up to the SEM-Grid location. For comparison, we review the current implementation of the stray field at injection that consists of a sequence of 235 multipoles K0, K1, K2 and K3 that were created using past measurements. These are scaled by the same factor. The transverse position as a function of the B field at injection closely matches the measurements, although the tracking model performs slightly worse than the multipole model; see Fig. \ref{fig:injection_btp_transverse_position}. This can be due to mumetal (high-permeability) shielding wrapped around the injection vacuum pipe that is not considered in the field map, or due to the fact that the field map is straight instead of being bent and/or a different initial position and angle of the tracked particle. As expected, no deviation is observed in the vertical plane.
+
+To test the model measurements of the beam position and size on PI.BSG42 were collected as the current provided by the main power supply (POPS) to the MUs was varied. As expected, an increasing current shows the transverse position of the beam is bent closer towards the inside of the ring by the stronger stray field. The measurements were compared to simulations tracking a single particle through the 2 GeV T-type field map presented in Fig.~\ref{fig:injection_btp_transverse_position}. The tracking simulation over estimates the effect of the stray field because the magnetic model does not yet include the mu-metal shielding wrapped around the injection vacuum pipe. As expected, no deviation was observed in the vertical plane.
 
 \begin{figure}[!htb]
    \centering
-   \includegraphics*[width=1.0\columnwidth]{MOPOTK030_f6.png}
-   \caption{Measurements of the BT3 BTP PS kick response as a function of POPS compared with the OPERA tracking model and the multipole field coefficient model.}
+   \includegraphics*[width=1.0\columnwidth]{transverse_position_vs_POPS.png}
+   \caption{Measurements of the BT3 BTP PS kick response as a function of POPS at PI.BSG42 compared with the OPERA tracking model.}
    \label{fig:injection_btp_transverse_position}
 \end{figure}
 
-Furthermore, the current model of the stray field is compared with the components found with tracking. The dipole component is saved along the track, and the quadrupole component is computed using two adjacent tracks with a slight transverse offset at the initial starting point. The OPERA tracking model gives components close to the previous model. The dipole integral of the OPERA model is $8.36\cdot10^{-3}$ Tm, and the multipole field coefficient (MFC) model gives $8.86\cdot10^{-3}$ Tm, which is a difference of 5.63\% compared to the MFC model. The integral of the quadrupole component of the OPERA model is $-6.68\cdot10^{-2}$ T and the MFC is $-7.43\cdot10^{-2}$ T, a 10.03\% difference compared to the MFC model.
-
-
-\subsection{Extraction to the East Area}
-The extraction to the East Area is affected by the stray fields of two main units, MU62 and MU63, a consequence of the beam having higher energy, leaving at a shallower angle than at injection. The beam position and angle upstream of a MAD-X simulation are saved and used as a starting position to track a single particle in MU62. The track follows the extraction beam pipe through MU62 and experiences the effect of both half-units. The stray field effect of the second half-unit is of particular importance; as the beam climbs the gradient hill, it experiences a nonlinear gradient with reverse polarity. This leads to a succession in defocusing gradients instead of having an alternating gradient that converges the beam. As a result, an increase in the horizontal beam size is expected at the exit of MU62. A distribution of particles created using MAD-X parameters is tracked through MU62, which shows the defocusing effect; see Fig. \ref{fig:particle_distribution}. Similar conclusions were drawn by T. Risselada using field measurements \cite{risselada_beam_nodate}.
+The stray field was implemented into the MAD-X model as a sequence of multipole field components (MFC model) expanded along the reference trajectory. A simplified approach with the fields components extracted on an injected trajectory assumed as straight line was compared with measurements in Fig.~\ref{fig:injection_btp_beam_size}, where the beam size at PI.BSG42 is plotted as a function of the POPS current. We find good agreement in the horizontal plane but a mismatch in the vertical plane. A quadrupole scan of this region was performed and an analysis will tell us whether this is the result of incorrect initial parameters.
 
 \begin{figure}[!htb]
    \centering
-   \includegraphics*[width=1.0\columnwidth]{MOPOTK030_f7.png}
-   \caption{Particle distribution entering MU62 (red) and exiting the MU (blue) following the extraction trajectory.}
-   \label{fig:particle_distribution}
+   \includegraphics*[width=1.0\columnwidth]{Beam_size_vs_POPS.png}
+   \caption{Measurements of the BT3 BTP PS beam size as a function of POPS at PI.BSG42 compared with the MCP model.}
+   \label{fig:injection_btp_beam_size}
+\end{figure}
+
+\section{Extraction to the East Area}
+The beam extracted to the East Area is significantly affected by the stray fields in multiple main units because the slow extracted trajectory at high energy has a much shallower angle than at injection. As presented in Fig.~\ref{fig:stray field gradients}, the difference in the gradient of MU62 is remarkable where the sign of the gradient flips and triples in amplitude. As a result, an increase in the horizontal beam size is expected at the exit of MU62. It is not understood why this magnet was never shimmed in the past to help reduce the effect of the stray field, but it is undoubtedly the cause of the optics discrepancy observed during commissioning of the East Area transfer lines in 2021 \cite{huschauer:ipac22-mopost006}.
+
+\textbf{Add your simple bar chart gradient comparison here: perhaps don't include MU63}
+
+\begin{figure}[!htb]
+   \centering
+   \includegraphics*[width=1.0\columnwidth]{gradient_focusing.png}
+   \caption{Gradient seen by the slow extracted beam in the stray field of the MUs. A succession in defocusing gradients at extraction is observed.}
+   \label{fig:stray field gradients}
 \end{figure}
 
 \subsection{Magnetic shims}
 
-To counteract stray fields, magnetic shims (low carbon steel shielding) are installed at ejections 16 and 63 to homogenize the field by shielding the ejected beam from the nonlinear fringe field \cite{zickler_influence_nodate}. In Section 16, the shims have different radial positions for each of the five different shims, whereas in Section 63, the vacuum pipe is covered with a constant rectangular shim. In Section 62, no shims are installed, where the model predicts the most important stray field effect. Field maps produced with the OPERA model do not include the effect of shims, and thus only give a partial description of the actual fields. Adding the shims in the OPERA model is considered but requires considerable rework, as the model takes advantage of a straight geometry, whereas the extraction pipe and shims are at an angle with respect to the main units which would increase the computational time.
+To counteract stray fields, magnetic shims are installed in MU16 (fast extraction to SPS) and MU63 (slow extraction to East Area) to homogenize the field by shielding the ejected beam from the non-linear fringe field \cite{zickler_influence_nodate}. In MU16, the shims have different radial positions for each of the five different shims, whereas in MU63, the vacuum pipe is covered with a constant rectangular shim. In MU62, no shims are installed, where the model predicts the most important stray field effect. In a next step the shim geometry will be incorporated into the \texttt{OPERA-3D} model, which will significantly increase the computation time of the finite element solver due to the increased complexity of the geometries.
+
+\subsection{Measurement of the extracted beam parameters}
+
+Quadrupole scans through the stray fields have been made using a combination of quadrupoles to change the beam size and measure it on the BTV screens of the East Area's dump line. The BTVs allows use to measure the position and the beam size as the quadrupoles focuse and defocus the beam. The measurements are then run in MAD-X with different initial conditions to find the ones that match the best. The BTVs aren't very precise, some are very noisy because of there old age and they all saturate at the extraction energy. Filter wheels have been installed and will allows more accurate initial parameter measurement. Additionally, an independent Dispersion measurement will be tried to reduce a degree of freedom.
+Also Kick response measurements have been made. Further studies should be performed to verify whether the initial parameters measured in the East Area are similar to those found by tracking through the field maps.
+
+%\textbf{State clearly the efforts we are going to here to measure the beam parameters that come out of the machine and through the stray fields. State the quad scan technique and challenges with lack of instrumentation but that work continues with BTVs and additional of filter wheels for a comparison with simulation}
 
 
-\section{CONCLUSION}
-The results of this study indicate that the OPERA model using tracking routines is suitable to characterize stray fields in the PS MU, as it has led to the same conclusions as made by earlier studies in the case of the extraction to the East Area and empirically confirmed through measurements at injection. Some limitations should be considered. First, the straight model of the MU is an approximation of the physical magnet, and second, the lack of shims in the model might not be suitable to fully describe the operational beam. This work may be valuable for CHIMERA during ions runs and provides the backbone to implement transfer maps or multipoles in MAD-X. Further studies should be performed to verify whether the initial parameters measured in the East Area are similar to those found by tracking through the field maps.
+\section{SUMMARY AND OUTLOOK}
+The results of this study indicate that the OPERA model using tracking routines is suitable to characterize stray fields in the PS MU, as it has led to the same conclusions as made by earlier studies in the case of the extraction to the East Area and empirically confirmed through measurements at injection. Some limitations should be considered. First, the straight model of the MU is an approximation of the physical magnet, and second, the lack of shims in the model might not be suitable to fully describe the operational beam. This work will be valuable for CHIMERA during ions runs and provides the backbone to create multipole field components models to the East Area and to the LHC.
 
 % REFERENCES
 \printbibliography
